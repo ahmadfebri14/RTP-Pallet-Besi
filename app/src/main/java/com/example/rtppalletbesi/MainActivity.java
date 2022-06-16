@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private final ArrayList<ListPacking> dataListPackings = new ArrayList<>();
     private TextView txtNoData;
-    private ProgressBar pgPacking;
     private RecyclerView rcPacking;
     private CountDownTimer cTimer = null;
     private Boolean statsScan = false;
@@ -76,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
         fabAdd = findViewById(R.id.fab_up_pack);
         txtNoData = findViewById(R.id.txt_no_data_packing);
-        pgPacking = findViewById(R.id.pg_packing);
         rcPacking = findViewById(R.id.rc_packing);
 
         fabAdd.setOnClickListener(view -> {
