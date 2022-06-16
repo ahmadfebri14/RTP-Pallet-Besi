@@ -43,7 +43,6 @@ public class AddPackingFragment extends DialogFragment {
     private DeviceHelper deviceHelper = new DeviceHelper();
 
     private Context context;
-    private CountDownTimer cTimer = null;
 
     private String pallet = "", roll = "", core = "", group = "", date = "";
     private String mode = "insert";
@@ -96,7 +95,6 @@ public class AddPackingFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         context = getActivity();
         preferenceHelper = new PreferenceHelper(context);
-        EditText edtTitlePacking = view.findViewById(R.id.txt_title_add_packing);
         edtPallet = view.findViewById(R.id.edt_pallet);
         edtRoll = view.findViewById(R.id.edt_roll);
         edtCore = view.findViewById(R.id.edt_core);
@@ -116,7 +114,6 @@ public class AddPackingFragment extends DialogFragment {
         listGroup.clear();
         if (!date.equals("")) {
             mode = "unpack";
-            edtTitlePacking.setEnabled(false);
             btnSimpan.setText("Unpack");
             listGroup.add(group);
         } else {
@@ -172,58 +169,6 @@ public class AddPackingFragment extends DialogFragment {
 //                    mainViewModel.emptySelectedPacking();
                     mainViewModel.deleteData(pallet);
                 }
-            }
-        });
-
-        //For barcode detail
-        final Dialog dialogBarcodeScan = new Dialog(context);
-        dialogBarcodeScan.setContentView(R.layout.barcode);
-        dialogBarcodeScan.setTitle("Scan");
-
-        edtTitlePacking.requestFocus();
-        edtTitlePacking.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                if (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-
-                } else {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                        exitApp();
-                        mainViewModel.addPackingFragment.dismiss();
-                    } else {
-                        if (!dialogBarcodeScan.isShowing()) {
-
-                            final EditText edBarcode = (EditText) dialogBarcodeScan.findViewById(R.id.edBarcode);
-                            edBarcode.setOnKeyListener(new View.OnKeyListener() {
-                                @Override
-                                public boolean onKey(View v, int keyCode, KeyEvent event) {
-                                    if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                                        mainViewModel.validateDb(edBarcode.getText().toString());
-//                                        validateDb(edBarcode.getText().toString());
-                                        edBarcode.setText("");
-                                        dialogBarcodeScan.dismiss();
-                                    }
-                                    return false;
-                                }
-                            });
-                            dialogBarcodeScan.show();
-
-                            cTimer = new CountDownTimer(2000, 1000) {
-                                public void onTick(long millisUntilFinished) {
-                                }
-
-                                public void onFinish() {
-                                    if (cTimer != null) {
-                                        cTimer.cancel();
-                                        dialogBarcodeScan.dismiss();
-                                    }
-                                }
-                            };
-                            cTimer.start();
-                        }
-                    }
-                }
-                return true;
             }
         });
 

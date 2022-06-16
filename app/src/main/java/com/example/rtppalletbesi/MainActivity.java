@@ -16,7 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -119,86 +122,96 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 }
             }
         });
+
+
+
+        IntentFilter filter = new IntentFilter();
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        filter.addAction(getResources().getString(R.string.activity_intent_filter_action));
+        registerReceiver(myBroadcastReceiver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(myBroadcastReceiver);
+    }
+
+    private BroadcastReceiver myBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Bundle b = intent.getExtras();
+            Log.v("cek", "ada1");
+            //
+            // The following is useful for debugging to verify
+            // the format of received intents from DataWedge:
+            //
+            for (String key : b.keySet()) {
+                Log.v("cek", key);
+            }
+            //
+
+            if (action.equals(getResources().getString(R.string.activity_intent_filter_action))) {
+                //
+                //  Received a barcode scan
+                //
+                Log.v("cek", "ada2");
+                try {
+                    Log.v("cek", "ada3");
+                    displayScanResult(intent, "via Broadcast");
+                } catch (Exception e) {
+                    Log.v("cek", "ada4");
+                    Log.v("cek", e.getMessage());
+
+                    //
+                    // Catch if the UI does not exist when broadcast is received
+                    //
+                }
+            }
+        }
+    };
+
+    private void displayScanResult(Intent initiatingIntent, String howDataReceived) {
+        String decodedSource = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_source));
+        String decodedData = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_data));
+        String decodedLabelType = initiatingIntent.getStringExtra(getResources().getString(R.string.datawedge_intent_key_label_type));
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment fragment = fm.findFragmentByTag("fragment_edit_name");
+
+        if (fragment == null) {
+            mainViewModel.getDataSelectedPacking(decodedData);
+        } else {
+            mainViewModel.validateDb(decodedData);
+        }
+
+        mainViewModel.getSelectedPacking().observe(MainActivity.this, new Observer<ListPacking>() {
+            @Override
+            public void onChanged(ListPacking listPacking) {
+                FragmentManager fm = getSupportFragmentManager();
+                Fragment fragment = fm.findFragmentByTag("fragment_edit_name");
+                if (fragment == null) {
+                    if (listPacking != null) {
+                        mainViewModel.emptyValueInsert();
+
+                        mainViewModel.addPackingFragment = AddPackingFragment.newInstance(
+                                listPacking.getPalletId(), listPacking.getNoRoll(), listPacking.getCoreId(),
+                                listPacking.getGroup(), listPacking.getDateScanPallet());
+                        mainViewModel.addPackingFragment.setCancelable(true);
+                        mainViewModel.addPackingFragment.show(fm, "fragment_edit_name");
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Data sudah ada list packing!", Toast.LENGTH_LONG).show();
+                        deviceHelper.vibrateDevice(500, getApplication());
+                    }
+                }
+            }
+        });
     }
 
     private static MainViewModel obtainViewModel(AppCompatActivity activity) {
         ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
         return new ViewModelProvider(activity, factory).get(MainViewModel.class);
-    }
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Dialog dialog;
-        dialog = new Dialog(this);
-        dialog.setContentView(R.layout.barcode);
-        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP || keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) {
-
-        } else {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                exitApp();
-            } else {
-                if (!dialog.isShowing() && statsScan == false) {
-
-                    final EditText edBarcode = (EditText) dialog.findViewById(R.id.edBarcode);
-                    edBarcode.setOnKeyListener(new View.OnKeyListener() {
-                        @Override
-                        public boolean onKey(View v, int keyCode, KeyEvent event) {
-                            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-                                String barcode = edBarcode.getText().toString();
-                                mainViewModel.getDataSelectedPacking(barcode);
-                                mainViewModel.getSelectedPacking().observe(MainActivity.this, new Observer<ListPacking>() {
-                                    @Override
-                                    public void onChanged(ListPacking listPacking) {
-                                        if (listPacking != null) {
-                                            mainViewModel.emptyValueInsert();
-
-                                            FragmentManager fm = getSupportFragmentManager();
-                                            Fragment fragment = fm.findFragmentByTag("fragment_edit_name");
-                                            if (fragment == null) {
-                                                mainViewModel.addPackingFragment = AddPackingFragment.newInstance(
-                                                        listPacking.getPalletId(), listPacking.getNoRoll(), listPacking.getCoreId(),
-                                                        listPacking.getGroup(), listPacking.getDateScanPallet());
-                                                mainViewModel.addPackingFragment.setCancelable(true);
-                                                mainViewModel.addPackingFragment.show(fm, "fragment_edit_name");
-                                            }
-                                        }
-                                    }
-                                });
-
-                                dialog.dismiss();
-                                statsScan = true;
-                                rcPacking.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-                            }
-                            return false;
-                        }
-                    });
-                    dialog.show();
-
-                    cTimer = new CountDownTimer(2000, 1000) {
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            if (cTimer != null) {
-                                cTimer.cancel();
-                                dialog.dismiss();
-                            }
-                        }
-                    };
-                    cTimer.start();
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        super.onKeyUp(keyCode, event);
-        if (event.getAction() == KeyEvent.ACTION_UP && event.getAction() != KeyEvent.ACTION_DOWN) {
-            statsScan = false;
-        }
-        return true;
     }
 
     private void showRecyclerListPallete() {
@@ -239,7 +252,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             try {
                 //Create the folder if not exist
                 File directoryFolder = new File("sdcard/PalletBesi/");
-                if(!directoryFolder.exists()) {
+                if (!directoryFolder.exists()) {
                     directoryFolder.mkdirs();
                 }
 

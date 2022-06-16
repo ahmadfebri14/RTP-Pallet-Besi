@@ -134,7 +134,6 @@ public class MainViewModel extends ViewModel {
                             Toast.makeText(application, "Data sudah ada list packing!", Toast.LENGTH_LONG).show();
                             deviceHelper.vibrateDevice(500, application);
                         } else {
-//                            insertData(data);
                             deviceHelper.vibrateDevice(300, application);
                             valueInsert.postValue(data);
                         }
@@ -156,10 +155,9 @@ public class MainViewModel extends ViewModel {
     public void emptyValueInsert() {
         valueInsert.postValue("");
     }
-
-    public void emptySelectedPacking() {
-        listSelectedPackings = new MutableLiveData<>();
-    }
+//    public void insertValue(String data) {
+//        valueInsert.postValue(data);
+//    }
 
     public void getDataListPacking() {
         appDatabase.listPackingDao().loadAllListPacking2()
@@ -245,6 +243,7 @@ public class MainViewModel extends ViewModel {
                                     listPackings.get(0).getDateScanPallet(), listPackings.get(0).getGroup());
                             listSelectedPackings.postValue(data);
                             deviceHelper.vibrateDevice(300, application);
+                            Log.d("cek1", "sini0");
                         }
                     }
 
