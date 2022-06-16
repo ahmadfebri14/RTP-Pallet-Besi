@@ -66,13 +66,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     private Boolean statsScan = false;
     private static final int READ_STORAGE_PERMISSION_REQUEST = 123;
     private MainViewModel mainViewModel;
+    String test = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         appDatabase = AppDatabase.getInstance(this);
-
         fabAdd = findViewById(R.id.fab_up_pack);
         txtNoData = findViewById(R.id.txt_no_data_packing);
         rcPacking = findViewById(R.id.rc_packing);
