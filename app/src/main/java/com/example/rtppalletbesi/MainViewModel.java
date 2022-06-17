@@ -5,7 +5,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -155,9 +154,6 @@ public class MainViewModel extends ViewModel {
     public void emptyValueInsert() {
         valueInsert.postValue("");
     }
-//    public void insertValue(String data) {
-//        valueInsert.postValue(data);
-//    }
 
     public void getDataListPacking() {
         appDatabase.listPackingDao().loadAllListPacking2()

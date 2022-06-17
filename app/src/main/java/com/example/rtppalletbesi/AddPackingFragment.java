@@ -12,9 +12,6 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.os.CountDownTimer;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +37,7 @@ public class AddPackingFragment extends DialogFragment {
     private EditText edtPallet, edtRoll, edtCore;
     private PreferenceHelper preferenceHelper;
     private MainViewModel mainViewModel;
-    private DeviceHelper deviceHelper = new DeviceHelper();
+    private final DeviceHelper deviceHelper = new DeviceHelper();
 
     private Context context;
 

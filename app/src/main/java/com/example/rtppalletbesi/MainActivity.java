@@ -7,7 +7,6 @@ import static android.os.Build.VERSION.SDK_INT;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -15,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,17 +22,12 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,15 +52,11 @@ import pub.devrel.easypermissions.EasyPermissions;
 public class MainActivity extends AppCompatActivity implements EasyPermissions.PermissionCallbacks {
     private AppDatabase appDatabase;
     private final DeviceHelper deviceHelper = new DeviceHelper();
-    private FloatingActionButton fabAdd;
     private PackingListAdapter packingListAdapter;
 
     private final ArrayList<ListPacking> dataListPackings = new ArrayList<>();
     private TextView txtNoData;
-    private ProgressBar pgPacking;
     private RecyclerView rcPacking;
-    private CountDownTimer cTimer = null;
-    private Boolean statsScan = false;
     private static final int READ_STORAGE_PERMISSION_REQUEST = 123;
     private MainViewModel mainViewModel;
 
@@ -77,9 +66,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         setContentView(R.layout.activity_main);
         appDatabase = AppDatabase.getInstance(this);
 
-        fabAdd = findViewById(R.id.fab_up_pack);
+        FloatingActionButton fabAdd = findViewById(R.id.fab_up_pack);
         txtNoData = findViewById(R.id.txt_no_data_packing);
-        pgPacking = findViewById(R.id.pg_packing);
         rcPacking = findViewById(R.id.rc_packing);
 
         fabAdd.setOnClickListener(view -> {
@@ -115,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 dataListPackings.clear();
                 dataListPackings.addAll(data);
                 packingListAdapter.notifyDataSetChanged();
-//                pgPacking.setVisibility(View.GONE);
 
                 if (dataListPackings.size() != 0) {
                     txtNoData.setVisibility(View.GONE);
@@ -307,7 +294,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     private void showSnackbarPermission() {
         View parentLayout = findViewById(android.R.id.content);
