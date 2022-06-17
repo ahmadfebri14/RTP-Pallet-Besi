@@ -124,7 +124,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         });
 
 
-
         IntentFilter filter = new IntentFilter();
         filter.addCategory(Intent.CATEGORY_DEFAULT);
         filter.addAction(getResources().getString(R.string.activity_intent_filter_action));
@@ -142,26 +141,17 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             Bundle b = intent.getExtras();
-            Log.v("cek", "ada1");
-            //
             // The following is useful for debugging to verify
             // the format of received intents from DataWedge:
-            //
-            for (String key : b.keySet()) {
-                Log.v("cek", key);
-            }
-            //
+//            for (String key : b.keySet()) {
+//                Log.v("cek", key);
+//            }
 
             if (action.equals(getResources().getString(R.string.activity_intent_filter_action))) {
-                //
                 //  Received a barcode scan
-                //
-                Log.v("cek", "ada2");
                 try {
-                    Log.v("cek", "ada3");
                     displayScanResult(intent, "via Broadcast");
                 } catch (Exception e) {
-                    Log.v("cek", "ada4");
                     Log.v("cek", e.getMessage());
 
                     //

@@ -136,7 +136,6 @@ public class AddPackingFragment extends DialogFragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 String selectedGroup = adapterView.getItemAtPosition(i).toString();
                 groupName = selectedGroup;
-                preferenceHelper.setGroup(selectedGroup);
             }
 
             @Override
@@ -153,6 +152,7 @@ public class AddPackingFragment extends DialogFragment {
                     roll = edtRoll.getText().toString();
                     core = edtCore.getText().toString();
                     group = groupName;
+                    preferenceHelper.setGroup(group);
                     date = getDate();
 
                     if (!pallet.equals("") && !roll.equals("") && !group.equals("")) {
@@ -198,6 +198,7 @@ public class AddPackingFragment extends DialogFragment {
                 edtRoll.setText(data);
             } else {
                 Toast.makeText(context, "Tidak sesuai format!", Toast.LENGTH_LONG).show();
+                mainViewModel.emptyValueInsert();
                 deviceHelper.vibrateDevice(500, (AppCompatActivity) context);
             }
         }

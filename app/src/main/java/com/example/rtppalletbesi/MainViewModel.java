@@ -243,7 +243,6 @@ public class MainViewModel extends ViewModel {
                                     listPackings.get(0).getDateScanPallet(), listPackings.get(0).getGroup());
                             listSelectedPackings.postValue(data);
                             deviceHelper.vibrateDevice(300, application);
-                            Log.d("cek1", "sini0");
                         }
                     }
 
