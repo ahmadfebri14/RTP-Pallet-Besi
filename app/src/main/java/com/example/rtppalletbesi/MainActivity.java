@@ -300,14 +300,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     // handle button activities
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_delete:
-//                mainViewModel.deleteAllData();
-//                break;
-//            case R.id.menu_export:
-//                new exportData().execute();
-//                break;
-//        }
         if (item.getItemId() == R.id.menu_delete) {
             mainViewModel.deleteAllData();
         } else if (item.getItemId() == R.id.menu_export) {
