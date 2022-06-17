@@ -1,7 +1,7 @@
 # RTP-Pallet-Besi
 Simple Barcode Scan for Zebra PDA TC26.
 
-Before using this application, you nedd configure your PDA setting.
+Before using this application, you need configure your PDA setting.
 1. Launch DataWedge via Applications --> DataWedge
 
 2. Select a Profile (Profile0 is used by DataWedge for all apps not explicitly assigned a Profile)
