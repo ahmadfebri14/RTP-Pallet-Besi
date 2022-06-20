@@ -71,7 +71,9 @@ public class AddPackingFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Remove Header for API19
-        getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        if(getDialog()!= null) {
+            getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
         return inflater.inflate(R.layout.fragment_add_packing, container, false);
     }
 
@@ -111,11 +113,11 @@ public class AddPackingFragment extends DialogFragment {
         listGroup.clear();
         if (!date.equals("")) {
             mode = "unpack";
-            btnSimpan.setText("Unpack");
+            btnSimpan.setText(R.string.unpack);
             listGroup.add(group);
         } else {
             mode = "insert";
-            btnSimpan.setText("Simpan");
+            btnSimpan.setText(R.string.save);
             listGroup.add(preferenceHelper.getGroup());
         }
 
@@ -131,8 +133,7 @@ public class AddPackingFragment extends DialogFragment {
         spGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedGroup = adapterView.getItemAtPosition(i).toString();
-                groupName = selectedGroup;
+                groupName = adapterView.getItemAtPosition(i).toString();
             }
 
             @Override
@@ -191,12 +192,12 @@ public class AddPackingFragment extends DialogFragment {
         } else if (data.contains("CBA")) {
             edtCore.setText(data);
         } else {
-            if (data.length() == 9 || data.length() == 10 || data.length() == 11) {
+            if (data.length() >= 9 && data.length() <= 11 && isNumeric(data)) {
                 edtRoll.setText(data);
             } else {
                 Toast.makeText(context, "Tidak sesuai format!", Toast.LENGTH_LONG).show();
                 mainViewModel.emptyValueInsert();
-                deviceHelper.vibrateDevice(500, (AppCompatActivity) context);
+                deviceHelper.vibrateDevice(500, context);
             }
         }
     }
@@ -207,5 +208,14 @@ public class AddPackingFragment extends DialogFragment {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         DateFormat dt = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         return df.format(c) + " " + dt.format(c);
+    }
+
+    private static boolean isNumeric(String data) {
+        try {
+            Double.parseDouble(data);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
     }
 }

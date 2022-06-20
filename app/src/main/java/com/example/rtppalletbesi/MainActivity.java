@@ -142,10 +142,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                     displayScanResult(intent, "via Broadcast");
                 } catch (Exception e) {
                     Log.v("cek", e.getMessage());
-
-                    //
                     // Catch if the UI does not exist when broadcast is received
-                    //
                 }
             }
         }
