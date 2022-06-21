@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Pallet Besi</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="dw_action">com.dwexample.ACTION</string>
@@ -8,7 +7,24 @@
     <string name="datawedge_intent_key_label_type">com.symbol.datawedge.label_type</string>
     <string name="datawedge_intent_key_data">com.symbol.datawedge.data_string</string>
     <string name="activity_intent_filter_action">com.dwbasicintent1.ACTION</string>
+
+
     <string name="save">Simpan</string>
     <string name="unpack">Unpack</string>
+    <string name="fab_desc">fab_for_add_packing</string>
+    <string name="no_data">No Data</string>
+    <string name="title_packing">PACKING SCAN DATA</string>
+    <string name="scan_barcode">Scan Barcode</string>
+    <string name="scan_packing">Scan Packing</string>
+    <string name="group">Group</string>
+    <string name="img_dropdown">img_dropdown</string>
+    <string name="pallet">Pallet</string>
+    <string name="no_roll">No Roll</string>
+    <string name="core_id">Core ID</string>
+    <string name="value">VALUE</string>
+    <string name="dummy_date_scan">Scanned by Pack A on 2022-02-02 13:00:00</string>
+    <string name="scan_roll_barcode">Scan Barcode Roll</string>
+    <string name="scan_roll_core">Scan Barcode Core</string>
+    <string name="scan_roll_pallet">Scan Barcode Pallet</string>
 
 </resources>

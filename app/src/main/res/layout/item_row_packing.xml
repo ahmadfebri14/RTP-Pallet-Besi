@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginVertical="8dp"
@@ -30,7 +29,7 @@
                     android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:text="Pallete" />
+                    android:text="@string/pallet" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -38,7 +37,7 @@
                     android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:text="Roll" />
+                    android:text="@string/no_roll" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -46,7 +45,7 @@
                     android:gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="@color/black"
-                    android:text="Core" />
+                    android:text="@string/core_id" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -61,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="VALUE" />
+                    android:layout_marginStart="10dp"
+                    android:text="@string/value" />
 
                 <TextView
                     android:id="@+id/txtRoll"
@@ -70,8 +69,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="VALUE" />
+                    android:layout_marginStart="10dp"
+                    android:text="@string/value" />
 
                 <TextView
                     android:id="@+id/txtCore"
@@ -79,8 +78,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="VALUE" />
+                    android:layout_marginStart="10dp"
+                    android:text="@string/value" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </LinearLayout>
 
@@ -90,9 +89,9 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:gravity="center_vertical"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="16dp"
-            android:text="Scanned by Pack A on 2022-02-02 13:00:00" />
+            android:text="@string/dummy_date_scan" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

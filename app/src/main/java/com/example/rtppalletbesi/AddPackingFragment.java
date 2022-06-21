@@ -164,7 +164,6 @@ public class AddPackingFragment extends DialogFragment {
                 } else {
                     pallet = edtPallet.getText().toString();
                     mainViewModel.addPackingFragment.dismiss();
-//                    mainViewModel.emptySelectedPacking();
                     mainViewModel.deleteData(pallet);
                 }
             }

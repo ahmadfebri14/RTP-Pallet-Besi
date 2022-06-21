@@ -10,22 +10,21 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <EditText
+        <TextView
             android:id="@+id/txt_title_add_packing"
-            android:text="Scan Packing"
+            android:text="@string/scan_packing"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:layout_gravity="center"
             android:layout_marginBottom="16sp"
             android:layout_width="wrap_content"
-            android:enabled="false"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Group"
+            android:text="@string/group"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:layout_width="wrap_content"
@@ -41,18 +40,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
                 android:background="@drawable/white_outline_edittext"
-                android:paddingRight="10dp"
+                android:paddingEnd="10dp"
                 android:spinnerMode="dropdown" />
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_gravity="center_vertical|right"
-                android:layout_marginRight="10dp"
-                android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                android:layout_gravity="center_vertical|end"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/img_dropdown" />
         </FrameLayout>
         <TextView
-            android:text="Pallet"
+            android:text="@string/pallet"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:layout_width="wrap_content"
@@ -65,11 +65,12 @@
             android:layout_marginBottom="16dp"
             android:padding="8dp"
             android:enabled="false"
+            android:hint="@string/scan_roll_pallet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="No Roll"
+            android:text="@string/no_roll"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:layout_width="wrap_content"
@@ -82,11 +83,12 @@
             android:layout_marginBottom="16dp"
             android:padding="8dp"
             android:enabled="false"
+            android:hint="@string/scan_roll_barcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:text="Core ID"
+            android:text="@string/core_id"
             android:textColor="@color/black"
             android:textSize="25sp"
             android:layout_width="wrap_content"
@@ -99,12 +101,13 @@
             android:layout_marginBottom="16dp"
             android:padding="8dp"
             android:enabled="false"
+            android:hint="@string/scan_roll_core"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
         <Button
             android:id="@+id/btn_simpan"
-            android:text="Simpan"
+            android:text="@string/save"
             android:layout_gravity="center"
             android:layout_marginTop="18dp"
             android:layout_width="200dp"

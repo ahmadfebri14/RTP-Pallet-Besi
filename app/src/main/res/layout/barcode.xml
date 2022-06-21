@@ -9,10 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:hint="@string/scan_barcode"
+        android:autofillHints="Scan Barcode" />
 
 </RelativeLayout>
