@@ -27,12 +27,15 @@ Before using this application, you need configure your PDA setting.
 There 3 barcode you need to scan:
 1. Pallet
 You need to scan barcode that contain PBA or PPA on barcode
+
 eg: PPA82AA123, PPA1234567, PBA82AA987
 
 2. Core
 You need to scan barcode that contain CBA on barcode
+
 eg: CBA82AA123, CBA1234567, CBA82AA987
 
 3. Roll
 You need to scan barcode that contains number and has a length of 9 to 11 digits
+
 eg: 157551431, 920480997, 150206733
